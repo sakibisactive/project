@@ -1,0 +1,15 @@
+.rental-properties-container {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 40px 20px;
+  background: #fafbfc;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(44, 62, 80, 0.10);
+}
+.rental-property-card {
+  background: #fff;
+  margin-bottom: 20px;
+  padding: 18px 12px;
+  border-radius: 7px;
+  box-shadow: 0 2px 8px rgba(100, 100, 100, 0.09);
+}

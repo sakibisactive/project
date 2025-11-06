@@ -1,0 +1,140 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f5f5f5;
+    color: #333;
+  }
+  
+  body.dark-mode {
+    background-color: #1a1a1a;
+    color: #e0e0e0;
+  }
+
+/* Sensible defaults so dark mode applies beyond the navbar */
+body.dark-mode a { color: #e0e0e0; }
+body.dark-mode .card,
+body.dark-mode .container,
+body.dark-mode .page,
+body.dark-mode .content,
+body.dark-mode .stories-container {
+  background-color: transparent;
+  color: #e0e0e0;
+}
+
+/* Page-specific dark styles without needing per-component props */
+body.dark-mode .price-analysis-container { background: #111; color: #e0e0e0; }
+body.dark-mode .price-analysis-form label { color: #cbd5e1; }
+body.dark-mode .price-analysis-form select,
+body.dark-mode .price-analysis-form .dropdown { background: #1f1f1f; border-color: #3a3a3a; color: #e0e0e0; }
+body.dark-mode .chart-section { background: #1a1a1a; box-shadow: none; }
+body.dark-mode .chart-header h2 { color: #e5e7eb; }
+body.dark-mode .chart-subtitle { color: #a1a1aa; }
+body.dark-mode .price-summary { background: #111827; }
+body.dark-mode .price-summary .price { color: #e5e7eb; }
+
+body.dark-mode .explore-container { background: linear-gradient(135deg, #111 0%, #1b1b1b 100%); }
+body.dark-mode .filters-container { background: #1f1f1f; box-shadow: 0 8px 32px rgba(0,0,0,.5); }
+body.dark-mode .filter-group label { color: #e5e7eb; }
+body.dark-mode .filter-select { background: #121212; border-color: #3a3a3a; color: #e5e7eb; }
+body.dark-mode .results-section { color: #e5e7eb; }
+body.dark-mode .properties-container { background: #1f1f1f; box-shadow: 0 8px 32px rgba(0,0,0,.5); }
+body.dark-mode .property-button { background: linear-gradient(135deg, #111 0%, #1b1b1b 100%); border-color: #3a3a3a; }
+
+body.dark-mode .suggestion-container { background: linear-gradient(135deg, #111 0%, #1b1b1b 100%); }
+body.dark-mode .location-info { background: #1f1f1f; border-left-color: #bb86fc; }
+body.dark-mode .property-card { background: #1f1f1f; box-shadow: 0 8px 24px rgba(0,0,0,.5); }
+body.dark-mode .card-header h3, 
+body.dark-mode .detail-value, 
+body.dark-mode .suggestions-header h2 { color: #e5e7eb; }
+body.dark-mode .detail-label { color: #a1a1aa; }
+body.dark-mode .card-footer { background: #111; }
+
+/* Contacts / Services page */
+body.dark-mode .contacts-container { background: linear-gradient(135deg, #111 0%, #1b1b1b 100%); }
+body.dark-mode .contacts-header h1 { color: #e5e7eb; }
+body.dark-mode .contacts-header p { color: #a1a1aa; }
+body.dark-mode .service-button { background: #1f1f1f; box-shadow: 0 8px 32px rgba(0,0,0,.5); }
+body.dark-mode .button-description { color: #cbd5e1; }
+
+/* Developers page */
+body.dark-mode .developers-container { background: linear-gradient(135deg, #111 0%, #1b1b1b 100%); }
+body.dark-mode .developers-header h1 { color: #e5e7eb; }
+body.dark-mode .developers-header p { color: #a1a1aa; }
+body.dark-mode .company-card { background: #1f1f1f; box-shadow: 0 8px 24px rgba(0,0,0,.5); }
+body.dark-mode .card-content h3 { color: #e5e7eb; }
+body.dark-mode .card-location,
+body.dark-mode .card-contact,
+body.dark-mode .card-buildings { color: #cbd5e1; }
+body.dark-mode .company-details-container { background: #1f1f1f; box-shadow: 0 8px 32px rgba(0,0,0,.5); }
+body.dark-mode .company-header { border-bottom-color: #333; }
+body.dark-mode .company-header h1 { color: #e5e7eb; }
+body.dark-mode .company-type { background: rgba(102,126,234,.2); color: #bb86fc; }
+body.dark-mode .info-card { background: #111; border-left-color: #bb86fc; }
+body.dark-mode .info-content h3 { color: #e5e7eb; }
+body.dark-mode .info-value { color: #cbd5e1; }
+body.dark-mode .company-description { background: #111; }
+
+/* Technicians page */
+body.dark-mode .technicians-container { background: linear-gradient(135deg, #111 0%, #1b1b1b 100%); }
+body.dark-mode .technicians-header h1 { color: #e5e7eb; }
+body.dark-mode .technicians-header p { color: #a1a1aa; }
+body.dark-mode .filter-btn { background: #1f1f1f; border-color: #3a3a3a; color: #e5e7eb; }
+body.dark-mode .worker-card { background: #1f1f1f; box-shadow: 0 8px 24px rgba(0,0,0,.5); }
+body.dark-mode .card-content h3 { color: #e5e7eb; }
+body.dark-mode .card-experience,
+body.dark-mode .card-location,
+body.dark-mode .card-rating { color: #cbd5e1; }
+body.dark-mode .worker-details-container { background: #1f1f1f; box-shadow: 0 8px 32px rgba(0,0,0,.5); }
+body.dark-mode .worker-header { border-bottom-color: #333; }
+body.dark-mode .worker-header h1 { color: #e5e7eb; }
+body.dark-mode .profession-badge { background: rgba(102,126,234,.2); color: #bb86fc; }
+body.dark-mode .info-card { background: #111; border-left-color: #bb86fc; }
+body.dark-mode .info-content h3 { color: #e5e7eb; }
+body.dark-mode .info-value { color: #cbd5e1; }
+body.dark-mode .worker-rating, 
+body.dark-mode .worker-description, 
+body.dark-mode .worker-skills { background: #111; }
+
+/* =========== Global panel unification (radius + shadow) =========== */
+/* Light mode panels */
+.filters-container,
+.properties-container,
+.property-card,
+.service-button,
+.company-card,
+.worker-card,
+.location-info,
+.price-card,
+.payment-form-section,
+.benefits-section,
+.payment-processing,
+.info-card,
+.faq-section,
+.notifications-list .notification-item {
+  border-radius: 14px;
+  box-shadow: 0 12px 28px rgba(0,0,0,.10);
+}
+
+/* Dark mode panels */
+body.dark-mode .filters-container,
+body.dark-mode .properties-container,
+body.dark-mode .property-card,
+body.dark-mode .service-button,
+body.dark-mode .company-card,
+body.dark-mode .worker-card,
+body.dark-mode .location-info,
+body.dark-mode .price-card,
+body.dark-mode .payment-form-section,
+body.dark-mode .benefits-section,
+body.dark-mode .payment-processing,
+body.dark-mode .info-card,
+body.dark-mode .faq-section,
+body.dark-mode .notifications-list .notification-item {
+  border-radius: 14px;
+  box-shadow: 0 16px 40px rgba(0,0,0,.45);
+}

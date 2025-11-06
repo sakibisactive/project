@@ -1,0 +1,232 @@
+.stories-container {
+  min-height: 100vh;
+  padding: 40px 20px;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+}
+
+.stories-container.dark,
+body.dark-mode .stories-container {
+  background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+}
+
+.stories-container.dark {
+  background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+}
+
+.stories-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.stories-header h1 {
+  color: #333;
+  font-size: 36px;
+  margin-bottom: 10px;
+}
+
+.stories-container.dark .stories-header h1,
+body.dark-mode .stories-container .stories-header h1 {
+  color: #fff;
+}
+
+.write-story-section {
+  max-width: 1200px;
+  margin: 0 auto 50px;
+}
+
+.btn-write-story {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+.btn-write-story:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+}
+
+.story-form-card {
+  background: white;
+  border-radius: 12px;
+  padding: 30px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
+}
+
+.stories-container.dark .story-form-card,
+body.dark-mode .stories-container .story-form-card {
+  background: #2d2d2d;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+}
+
+.story-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #333;
+  font-size: 14px;
+}
+
+.stories-container.dark .form-group label,
+body.dark-mode .stories-container .form-group label {
+  color: #fff;
+}
+
+.form-input {
+  padding: 12px;
+  border: 2px solid #ddd;
+  border-radius: 6px;
+  font-size: 14px;
+  font-family: inherit;
+}
+
+.stories-container.dark .form-input,
+body.dark-mode .stories-container .form-input {
+  background: #1a1a1a;
+  border-color: #444;
+  color: #fff;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 0 0 8px rgba(102, 126, 234, 0.3);
+}
+
+.stories-tabs {
+  display: flex;
+  gap: 15px;
+  margin: 30px 0;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.tab-btn {
+  background: white;
+  border: 2px solid #ddd;
+  padding: 10px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.tab-btn.active {
+  background: #667eea;
+  color: white;
+  border-color: #667eea;
+}
+
+.stories-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 25px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.story-card {
+  background: white;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.stories-container.dark .story-card,
+body.dark-mode .stories-container .story-card {
+  background: #2d2d2d;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.story-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.2);
+}
+
+.story-card h3 {
+  color: #333;
+  margin: 0 0 10px 0;
+  font-size: 18px;
+}
+
+.stories-container.dark .story-card h3,
+body.dark-mode .stories-container .story-card h3 {
+  color: #fff;
+}
+
+.story-meta {
+  color: #666;
+  font-size: 12px;
+  margin-bottom: 12px;
+}
+
+.stories-container.dark .story-meta,
+body.dark-mode .stories-container .story-meta {
+  color: #aaa;
+}
+
+.story-content {
+  color: #555;
+  line-height: 1.6;
+  margin-bottom: 15px;
+  font-size: 14px;
+}
+
+.stories-container.dark .story-content,
+body.dark-mode .stories-container .story-content {
+  color: #ccc;
+}
+
+.no-stories {
+  text-align: center;
+  padding: 60px 20px;
+  color: #999;
+  grid-column: 1 / -1;
+}
+
+.status-badge {
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.status-badge.pending {
+  background: #fff3cd;
+  color: #856404;
+}
+
+.status-badge.approved {
+  background: #d4edda;
+  color: #155724;
+}
+
+@media (max-width: 768px) {
+  .stories-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .stories-header h1 {
+    font-size: 28px;
+  }
+}

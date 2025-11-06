@@ -1,0 +1,8 @@
+.dashboard {
+    min-height: 100vh;
+    padding-bottom: 50px;
+  }
+  
+  .dashboard.dark {
+    background-color: #1a1a1a;
+  }

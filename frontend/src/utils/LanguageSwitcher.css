@@ -1,0 +1,69 @@
+.language-switcher {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.language-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: white;
+  border: 2px solid #ddd;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+  color: #333;
+  transition: all 0.3s ease;
+}
+
+.language-btn:hover {
+  border-color: #667eea;
+  background: #f5f7fa;
+}
+
+.language-btn.active {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border-color: #667eea;
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+.language-flag {
+  font-size: 16px;
+}
+
+.language-name {
+  display: none;
+}
+
+@media (min-width: 600px) {
+  .language-name {
+    display: inline;
+  }
+}
+
+/* Dark mode support */
+.language-btn {
+  background: white;
+  border-color: #ddd;
+  color: #333;
+}
+
+.dark-mode .language-btn {
+  background: #2d2d2d;
+  border-color: #444;
+  color: #fff;
+}
+
+.dark-mode .language-btn:hover {
+  background: #1a1a1a;
+  border-color: #667eea;
+}
+
+.dark-mode .language-btn.active {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}

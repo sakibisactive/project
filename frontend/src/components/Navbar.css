@@ -1,0 +1,454 @@
+/* ==================== NAVBAR CONTAINER ==================== */
+.navbar {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 15px 30px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.navbar.dark {
+  background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.5);
+}
+
+.navbar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* ==================== LOGO ==================== */
+.navbar-logo {
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.navbar-logo h1 {
+  color: white;
+  font-size: 24px;
+  font-weight: 700;
+  margin: 0;
+  letter-spacing: 1px;
+}
+
+.navbar-logo:hover h1 {
+  text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+}
+
+/* ==================== CENTER NAVIGATION MENU ==================== */
+.navbar-menu {
+  display: flex;
+  gap: 25px;
+  align-items: center;
+  flex: 1;
+  justify-content: center;
+}
+
+.nav-link {
+  color: rgba(255, 255, 255, 0.9);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+  padding: 8px 12px;
+  border-radius: 6px;
+}
+
+.nav-link:hover {
+  color: white;
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px);
+}
+
+/* ==================== RIGHT SECTION ==================== */
+.navbar-right {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+/* Upgrade pill button */
+.upgrade-pill {
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+  color: #0b0b0b;
+  font-weight: 800;
+  text-decoration: none;
+  letter-spacing: .5px;
+  border: 2px solid rgba(255,255,255,.3);
+}
+.navbar.dark .upgrade-pill { color: #0b0b0b; }
+
+/* ==================== USER INFO ==================== */
+.user-info {
+  color: rgba(255, 255, 255, 0.95);
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 12px;
+  white-space: nowrap;
+}
+
+.user-info strong {
+  font-weight: 700;
+  color: white;
+}
+
+.role-badge {
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.role-badge.premium {
+  background: linear-gradient(135deg, #ffd89b 0%, #19547b 100%);
+  color: white;
+}
+
+/* ==================== ICON BUTTONS ==================== */
+.icon-btn {
+  background: rgba(255, 255, 255, 0.15);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  color: white;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.icon-btn:hover {
+  background: rgba(255, 255, 255, 0.25);
+  border-color: white;
+  transform: scale(1.05);
+}
+
+.icon-btn:active {
+  transform: scale(0.98);
+}
+
+/* ==================== NOTIFICATION BELL ==================== */
+.notification-btn {
+  position: relative;
+}
+
+.notification-badge {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background: #ff6b6b;
+  color: white;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  font-size: 10px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid white;
+}
+
+/* ==================== PROFILE DROPDOWN ==================== */
+.profile-dropdown {
+  position: relative;
+}
+
+.profile-dropdown-menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+  margin-top: 10px;
+  min-width: 220px;
+  z-index: 1000;
+  overflow: hidden;
+  animation: slideDown 0.3s ease;
+}
+
+.navbar.dark .profile-dropdown-menu {
+  background: #2d2d2d;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  color: #333;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  border: none;
+  background: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 100%;
+  text-align: left;
+}
+
+.navbar.dark .dropdown-item {
+  color: #fff;
+}
+
+.dropdown-item:hover {
+  background: #f0f0f0;
+  padding-left: 20px;
+}
+
+.navbar.dark .dropdown-item:hover {
+  background: #1a1a1a;
+}
+
+.dropdown-item svg {
+  flex-shrink: 0;
+  color: #667eea;
+}
+
+.dropdown-divider {
+  height: 1px;
+  background: #eee;
+  margin: 8px 0;
+}
+
+.navbar.dark .dropdown-divider {
+  background: #444;
+}
+
+.logout-item {
+  color: #ff6b6b;
+}
+
+.logout-item:hover {
+  background: rgba(255, 107, 107, 0.1);
+}
+
+.navbar.dark .logout-item:hover {
+  background: rgba(255, 107, 107, 0.15);
+}
+
+/* ==================== LANGUAGE SWITCHER ==================== */
+.language-switcher-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+/* Make globe button visually match other icon buttons */
+.language-btn { }
+
+/* ==================== MOBILE MENU TOGGLE ==================== */
+.menu-toggle {
+  display: none;
+  background: rgba(255, 255, 255, 0.15);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  color: white;
+  width: 40px;
+  height: 40px;
+  border-radius: 6px;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.menu-toggle:hover {
+  background: rgba(255, 255, 255, 0.25);
+  border-color: white;
+}
+
+/* ==================== RESPONSIVE DESIGN ==================== */
+@media (max-width: 1024px) {
+  .navbar-container {
+    gap: 15px;
+  }
+
+  .navbar-menu {
+    gap: 15px;
+  }
+
+  .nav-link {
+    font-size: 13px;
+  }
+
+  .user-info {
+    display: none;
+  }
+
+  .navbar-right {
+    gap: 10px;
+  }
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    padding: 12px 15px;
+  }
+
+  .navbar-container {
+    gap: 10px;
+  }
+
+  .navbar-logo h1 {
+    font-size: 20px;
+  }
+
+  /* Hide menu by default on mobile */
+  .navbar-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    gap: 8px;
+    background: inherit;
+    padding: 15px;
+    display: none;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex: none;
+  }
+
+  .navbar-menu.open {
+    display: flex;
+  }
+
+  .nav-link {
+    width: 100%;
+    font-size: 14px;
+  }
+
+  .menu-toggle {
+    display: flex;
+  }
+
+  .user-info {
+    display: none;
+  }
+
+  .language-switcher-wrapper {
+    display: none;
+  }
+
+  .navbar-right {
+    gap: 8px;
+  }
+
+  .icon-btn {
+    width: 36px;
+    height: 36px;
+    font-size: 16px;
+  }
+
+  .profile-dropdown-menu {
+    right: auto;
+    left: 0;
+    min-width: 180px;
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar {
+    padding: 10px 10px;
+  }
+
+  .navbar-logo h1 {
+    font-size: 18px;
+  }
+
+  .navbar-container {
+    gap: 8px;
+  }
+
+  .navbar-right {
+    gap: 6px;
+  }
+
+  .icon-btn {
+    width: 32px;
+    height: 32px;
+    font-size: 14px;
+  }
+
+  .notification-badge {
+    width: 16px;
+    height: 16px;
+    font-size: 9px;
+  }
+
+  .profile-dropdown-menu {
+    min-width: 160px;
+  }
+
+  .dropdown-item {
+    padding: 10px 12px;
+    font-size: 13px;
+  }
+}
+
+/* ==================== DARK MODE ==================== */
+.navbar.dark .nav-link {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.navbar.dark .nav-link:hover {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.navbar.dark .user-info {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.navbar.dark .icon-btn {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.navbar.dark .icon-btn:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+/* ==================== ACCESSIBILITY ==================== */
+@media (prefers-reduced-motion: reduce) {
+  .icon-btn,
+  .nav-link,
+  .dropdown-item,
+  .profile-dropdown-menu {
+    transition: none;
+  }
+}

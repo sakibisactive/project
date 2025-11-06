@@ -1,0 +1,24 @@
+.advertise-property {
+  max-width: 700px;
+  margin: 40px auto;
+  background: #fff;
+  padding: 40px 32px;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(70, 76, 80, 0.09);
+}
+.form-group {
+  margin-bottom: 20px;
+}
+.btn-submit {
+  background: #764ba2;
+  color: white;
+  border: none;
+  padding: 12px 28px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.25s;
+}
+.btn-submit:hover {
+  background: #667eea;
+}

@@ -1,0 +1,106 @@
+.landing-page {
+    position: relative;
+    height: 100vh;
+    overflow: hidden;
+  }
+  
+  .landing-nav {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 50px;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(10px);
+    z-index: 100;
+  }
+  
+  .logo h1 {
+    color: white;
+    font-size: 32px;
+    margin: 0;
+  }
+  
+  .auth-buttons {
+    display: flex;
+    gap: 15px;
+  }
+  
+  .btn {
+    padding: 12px 30px;
+    text-decoration: none;
+    border-radius: 25px;
+    font-weight: 600;
+    transition: all 0.3s;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .btn-login {
+    background: transparent;
+    color: white;
+    border: 2px solid white;
+  }
+  .btn-login:hover {
+    background: white;
+    color: #333;
+  }
+  
+  .btn-register {
+    background: #4CAF50;
+    color: white;
+  }
+  .btn-register:hover {
+    background: #45a049;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(76, 175, 80, 0.3);
+  }
+  
+  .landing-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    z-index: 10;
+  }
+  
+  .landing-overlay {
+    background: rgba(0, 0, 0, 0.6);
+    padding: 50px;
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+  }
+  
+  .landing-overlay h2 {
+    color: white;
+    font-size: 48px;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  }
+  
+  .landing-overlay p {
+    color: #f0f0f0;
+    font-size: 24px;
+    margin-bottom: 30px;
+  }
+  
+  .btn-get-started {
+    padding: 15px 50px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    font-size: 18px;
+    display: inline-block;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+  .btn-get-started:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+  }
+  
