@@ -1,0 +1,84 @@
+.admin-premium-members {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.admin-premium-members h2 {
+  color: #333;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.premium-members-list {
+  display: grid;
+  gap: 1rem;
+}
+
+.member-card {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2rem;
+}
+
+.member-info {
+  flex: 1;
+}
+
+.member-info h3 {
+  margin: 0;
+  color: #2c3e50;
+}
+
+.member-info p {
+  margin: 0.5rem 0;
+  color: #666;
+}
+
+.verified-badge {
+  background: #2ecc71;
+  color: white;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.875rem;
+}
+
+.verified-badge.pending {
+  background: #f1c40f;
+}
+
+.member-stats {
+  display: flex;
+  gap: 2rem;
+}
+
+.stat {
+  text-align: center;
+}
+
+.stat span {
+  display: block;
+  color: #666;
+  font-size: 0.875rem;
+  margin-bottom: 0.25rem;
+}
+
+.stat strong {
+  display: block;
+  color: #2c3e50;
+  font-size: 1.5rem;
+}
+
+.error {
+  color: #e74c3c;
+  text-align: center;
+  padding: 1rem;
+  background: #ffd7d7;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+}

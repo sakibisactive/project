@@ -2,12 +2,27 @@ const User = require('../models/User');
 const Notification = require('../models/Notification');
 const AdminLog = require('../models/AdminLog');
 const Story = require('../models/Story');
+const Meeting = require('../models/Meeting');
+const Property = require('../models/Property');
+const Faq = require('../models/Faq');
 
 exports.getPendingVerifications = async (req, res) => {
   try {
     const users = await User.find({ 
       role: 'premium', 
       verified: false 
+    }).select('-password');
+
+    res.json({ success: true, users });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
+exports.getPendingDeletions = async (req, res) => {
+  try {
+    const users = await User.find({ 
+      deletionRequested: true 
     }).select('-password');
 
     res.json({ success: true, users });
@@ -116,6 +131,170 @@ exports.getPremiumMembers = async (req, res) => {
 
 
     res.json({ success: true, premiumMembers });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
+exports.handleStory = async (req, res) => {
+  try {
+    const { action } = req.body;
+    const story = await Story.findById(req.params.id);
+
+    if (!story) {
+      return res.status(404).json({ error: 'Story not found' });
+    }
+
+    story.status = action === 'approve' ? 'approved' : 'rejected';
+    await story.save();
+
+    // Log action
+    await AdminLog.create({
+      adminId: req.user._id,
+      action: action === 'approve' ? 'approved' : 'rejected',
+      targetType: 'story',
+      targetId: story._id,
+      details: `${action === 'approve' ? 'Approved' : 'Rejected'} story: ${story._id}`
+    });
+
+    // Notify user
+    await Notification.create({
+      userId: story.userId,
+      type: 'story',
+      message: `Your story has been ${action === 'approve' ? 'approved' : 'rejected'}`,
+      relatedId: story._id
+    });
+
+    res.json({ success: true, story });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
+exports.handleMeeting = async (req, res) => {
+  try {
+    const { action } = req.body;
+    const meeting = await Meeting.findById(req.params.id);
+
+    if (!meeting) {
+      return res.status(404).json({ error: 'Meeting not found' });
+    }
+
+    meeting.status = action === 'approve' ? 'approved' : 'rejected';
+    await meeting.save();
+
+    // Log action
+    await AdminLog.create({
+      adminId: req.user._id,
+      action: action === 'approve' ? 'approved' : 'rejected',
+      targetType: 'meeting',
+      targetId: meeting._id,
+      details: `${action === 'approve' ? 'Approved' : 'Rejected'} meeting: ${meeting._id}`
+    });
+
+    // Notify user
+    await Notification.create({
+      userId: meeting.userId,
+      type: 'meeting',
+      message: `Your meeting request has been ${action === 'approve' ? 'approved' : 'rejected'}`,
+      relatedId: meeting._id
+    });
+
+    res.json({ success: true, meeting });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
+exports.getPendingMeetings = async (req, res) => {
+  try {
+    const meetings = await Meeting.find({ status: 'pending' })
+      .populate('userId', 'name')
+      .populate('propertyId', 'propertyType location')
+      .sort({ createdAt: -1 });
+
+    res.json({ success: true, meetings });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
+exports.getPendingQuestions = async (req, res) => {
+  try {
+    const questions = await Faq.find({ answer: '' })
+      .populate('askedBy', 'name')
+      .sort({ createdAt: -1 });
+
+    res.json({ success: true, questions });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
+exports.handleQuestion = async (req, res) => {
+  try {
+    const { answer } = req.body;
+    const question = await Faq.findById(req.params.id);
+
+    if (!question) {
+      return res.status(404).json({ error: 'Question not found' });
+    }
+
+    question.answer = answer;
+    question.answeredBy = req.user._id;
+    await question.save();
+
+    // Log action
+    await AdminLog.create({
+      adminId: req.user._id,
+      action: 'answered',
+      targetType: 'question',
+      targetId: question._id,
+      details: `Answered question: ${question._id}`
+    });
+
+    // Notify user
+    await Notification.create({
+      userId: question.askedBy,
+      type: 'question',
+      message: 'Your question has been answered',
+      relatedId: question._id
+    });
+
+    res.json({ success: true, question });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
+exports.deleteProperty = async (req, res) => {
+  try {
+    const property = await Property.findById(req.params.id);
+
+    if (!property) {
+      return res.status(404).json({ error: 'Property not found' });
+    }
+
+    // Log action
+    await AdminLog.create({
+      adminId: req.user._id,
+      action: 'deleted',
+      targetType: 'property',
+      targetId: property._id,
+      details: `Deleted property: ${property._id}`
+    });
+
+    await property.deleteOne();
+
+    // Notify property owner
+    await Notification.create({
+      userId: property.userId,
+      type: 'property',
+      message: 'Your property listing has been removed by an admin',
+      relatedId: property._id
+    });
+
+    res.json({ success: true, message: 'Property deleted successfully' });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }

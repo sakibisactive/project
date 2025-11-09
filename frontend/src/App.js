@@ -20,6 +20,11 @@ import Dashboard from './components/Dashboard';
 import PropertySearch from './components/PropertySearch';
 import Notifications from './components/Notifications';
 import AdminDashboard from './components/AdminDashboard';
+import AdminVerifications from './pages/AdminVerifications';
+import AdminPremiumMembers from './pages/AdminPremiumMembers';
+import AdminStories from './pages/AdminStories';
+import AdminMeetings from './pages/AdminMeetings';
+import AdminQuestions from './pages/AdminQuestions';
 import PaymentPage from './components/Payment';
 import PropertyDetails from './pages/PropertyDetails';
 import Advertise from './pages/Advertise';
@@ -82,9 +87,44 @@ function AppRoutes({ darkMode }) {
           <AdminDashboard />
         </PrivateRoute>
       } />
+      <Route path="/admin/verifications" element={
+        <PrivateRoute role="admin">
+          <AdminVerifications />
+        </PrivateRoute>
+      } />
+      <Route path="/admin/premium-members" element={
+        <PrivateRoute role="admin">
+          <AdminPremiumMembers />
+        </PrivateRoute>
+      } />
+      <Route path="/admin/stories" element={
+        <PrivateRoute role="admin">
+          <AdminStories />
+        </PrivateRoute>
+      } />
+      <Route path="/admin/meetings" element={
+        <PrivateRoute role="admin">
+          <AdminMeetings />
+        </PrivateRoute>
+      } />
+      <Route path="/admin/questions" element={
+        <PrivateRoute role="admin">
+          <AdminQuestions />
+        </PrivateRoute>
+      } />
       <Route path="/payment" element={
         <PrivateRoute>
           <PaymentPage darkMode={darkMode} />
+        </PrivateRoute>
+      } />
+      <Route path="/property" element={
+        <PrivateRoute>
+          <PropertyDetails />
+        </PrivateRoute>
+      } />
+      <Route path="/property/:id" element={
+        <PrivateRoute>
+          <PropertyDetails />
         </PrivateRoute>
       } />
       {/* Standard Auth routes */}

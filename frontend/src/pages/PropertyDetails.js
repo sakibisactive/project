@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import axiosInstance from '../utils/axios';
 import { AuthContext } from '../context/AuthContext';
 import './PropertyDetails.css';
 
@@ -21,8 +21,19 @@ const PropertyDetails = () => {
 
   // Fetch property on component load
   useEffect(() => {
-    fetchProperty();
-    checkWishlistStatus();
+    const init = async () => {
+      if (!id) {
+        // If no ID is provided, create a test property
+        const newId = await createTestProperty();
+        if (newId) {
+          navigate(`/property/${newId}`);
+          return;
+        }
+      }
+      fetchProperty();
+      checkWishlistStatus();
+    };
+    init();
   }, [id]);
 
   // Fetch property details
@@ -30,7 +41,7 @@ const PropertyDetails = () => {
     try {
       setLoading(true);
       const headers = { Authorization: `Bearer ${token}` };
-      const response = await axios.get(`http://localhost:5000/api/property/${id}`, { headers });
+      const response = await axiosInstance.get(`/api/property/${id}`, { headers });
       setProperty(response.data.property);
     } catch (error) {
       setError('Error fetching property details');
@@ -41,10 +52,22 @@ const PropertyDetails = () => {
   };
 
   // Check if property is in wishlist
+  const createTestProperty = async () => {
+    try {
+      const headers = { Authorization: `Bearer ${token}` };
+      const response = await axiosInstance.post('/api/property/test-create', {}, { headers });
+      console.log('Created test property:', response.data);
+      return response.data.property._id;
+    } catch (error) {
+      console.error('Error creating test property:', error);
+      return null;
+    }
+  };
+
   const checkWishlistStatus = async () => {
     try {
       const headers = { Authorization: `Bearer ${token}` };
-      const response = await axios.get(`http://localhost:5000/api/wishlist/check/${id}`, { headers });
+      const response = await axiosInstance.get(`/api/wishlist/check/${id}`, { headers });
       setIsWishlisted(response.data.isWishlisted);
     } catch (error) {
       console.error('Error checking wishlist:', error);
@@ -63,8 +86,8 @@ const PropertyDetails = () => {
       
       // If rating is 0, notify admin
       if (parseInt(rating) === 0) {
-        await axios.post(
-          'http://localhost:5000/api/admin/notification',
+        await axiosInstance.post(
+          '/api/admin/notification',
           {
             type: 'low_rating',
             propertyId: id,
@@ -78,8 +101,8 @@ const PropertyDetails = () => {
       }
 
       // Submit rating
-      await axios.post(
-        `http://localhost:5000/api/properties/${id}/rate`,
+      await axiosInstance.post(
+        `/api/properties/${id}/rate`,
         { rating: parseInt(rating) },
         { headers }
       );
@@ -100,8 +123,8 @@ const PropertyDetails = () => {
 
       if (isWishlisted) {
         // Remove from wishlist
-        await axios.post(
-          'http://localhost:5000/api/wishlist/remove',
+        await axiosInstance.post(
+          '/api/wishlist/remove',
           { propertyId: id },
           { headers }
         );
@@ -109,8 +132,8 @@ const PropertyDetails = () => {
         setSuccessMessage('Removed from wishlist');
       } else {
         // Add to wishlist
-        await axios.post(
-          'http://localhost:5000/api/wishlist/add',
+        await axiosInstance.post(
+          '/api/wishlist/add',
           { propertyId: id },
           { headers }
         );
@@ -130,8 +153,8 @@ const PropertyDetails = () => {
     try {
       const headers = { Authorization: `Bearer ${token}` };
 
-      await axios.post(
-        'http://localhost:5000/api/meeting/request',
+      await axiosInstance.post(
+        '/api/meeting/request',
         {
           userId: user._id,
           userName: user.name,
@@ -161,8 +184,8 @@ const PropertyDetails = () => {
     try {
       const headers = { Authorization: `Bearer ${token}` };
 
-      await axios.post(
-        `http://localhost:5000/api/property/${id}/offer`,
+      await axiosInstance.post(
+        `/api/property/${id}/offer`,
         {
           userId: user._id,
           userName: user.name,

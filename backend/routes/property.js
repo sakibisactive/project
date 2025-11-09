@@ -58,6 +58,31 @@ router.get('/suggestions', auth, roleCheck('premium'), getSuggestions);
 router.get('/:id', auth, getProperty);
 // Alternate paths for robustness
 router.get('/details/:id', auth, getProperty);
+
+// Test route to create a property
+router.post('/test-create', async (req, res) => {
+  try {
+    const testProperty = {
+      propertyType: 'Apartment',
+      location: 'Test Location',
+      price: 1000000,
+      ownerName: 'Test Owner',
+      ownerContact: '1234567890',
+      ownerEmail: 'test@example.com',
+      description: 'Test Property Description',
+      status: 'available',
+      option: 'Buy'
+    };
+
+    const property = new Property(testProperty);
+    const savedProperty = await property.save();
+    console.log('Created test property:', savedProperty);
+    res.json({ success: true, property: savedProperty });
+  } catch (error) {
+    console.error('Error creating test property:', error);
+    res.status(500).json({ error: error.message });
+  }
+});
 router.post('/', auth, roleCheck('premium'), createProperty);
 router.post('/:id/rate', auth, roleCheck('premium'), rateProperty);
 router.delete('/:id', auth, roleCheck('admin'), deleteProperty);

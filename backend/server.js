@@ -11,7 +11,12 @@ const app = express();
 // ==================== MIDDLEWARE ====================
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cors());
+app.use(cors({
+  origin: true,
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
 app.use(cookieParser());
 app.use((req, res, next) => {
   console.log("Received:", req.method, req.url);
@@ -38,6 +43,10 @@ const propertyRoutes = require('./routes/property');
 app.use('/api/property', propertyRoutes);
 // Alias to support legacy/pluralized endpoints
 app.use('/api/properties', propertyRoutes);
+
+// Admin Routes
+const adminRoutes = require('./routes/admin');
+app.use('/api/admin', adminRoutes);
 
 // Contacts Routes
 const contactsRoutes = require('./routes/contacts');
@@ -68,10 +77,6 @@ app.use('/api/story', require('./routes/story'));
 // Payment Routes
 const paymentRoutes = require('./routes/payment');
 app.use('/api/payment', paymentRoutes);
-
-// Admin Routes
-const adminRoutes = require('./routes/admin');
-app.use('/api/admin', adminRoutes);
 
 // ==================== NEW ROUTES (PHASE 5) ====================
 // Price Analysis Routes

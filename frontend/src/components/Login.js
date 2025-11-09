@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import axios from 'axios';
+import axios from '../utils/axios';
 import { AuthContext } from '../context/AuthContext';
 import './Auth.css';
 
@@ -26,7 +26,7 @@ const Login = () => {
 
     try {
       // Send login POST request
-      const res = await axios.post('http://localhost:5000/api/auth/login', formData);
+      const res = await axios.post('/api/auth/login', formData);
 
       // IMPORTANT: Save token and user in context + localStorage!
       login(res.data.token, res.data.user);
