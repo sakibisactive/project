@@ -27,7 +27,7 @@ const Technicians = () => {
 
     try {
       // API call: GET /api/technician/all or with profession filter
-      let url = 'http://localhost:5000/api/contacts/technicians';
+      let url = 'http://localhost:5001/api/contacts/technicians';
 
 // Optionally handle filter:
 if (profession) {

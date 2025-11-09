@@ -72,7 +72,7 @@ Action Required:
 Rating Given At: ${new Date().toLocaleString()}
       `.trim();
 
-        await axios.post('http://localhost:5000/api/admin/notification', {
+        await axios.post('http://localhost:5001/api/admin/notification', {
           type: 'low_rating_alert',
           propertyId: propertyId,
           userId: userId,

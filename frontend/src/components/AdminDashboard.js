@@ -12,77 +12,133 @@ const AdminDashboard = () => {
   const [pendingStories, setPendingStories] = useState([]);
   const [pendingMeetings, setPendingMeetings] = useState([]);
   const [pendingQuestions, setPendingQuestions] = useState([]);
+  const [loadingData, setLoadingData] = useState(true);
+  const [errors, setErrors] = useState({});
 
   useEffect(() => {
-    fetchAdminData();
-  }, []);
+    if (user?.role === 'admin') {
+      fetchAdminData();
+    }
+    // eslint-disable-next-line
+  }, [user]);
 
   const fetchAdminData = async () => {
-    try {
-      const [verifications, deletions, stories, meetings, questions] = await Promise.all([
-        axios.get('/api/admin/pending-verifications'),
-        axios.get('/api/admin/pending-deletions'),
-        axios.get('/api/admin/pending-stories'),
-        axios.get('/api/admin/pending-meetings'),
-        axios.get('/api/admin/pending-questions')
-      ]);
+    setLoadingData(true);
+    setErrors({});
+    // Utility for fetching and setting each data type
+    const fetchData = async (url, setter, errorKey, dataKey) => {
+      try {
+        const response = await axios.get(url);
+        setter(response.data?.[dataKey] || []);
+      } catch (error) {
+        setErrors(prev => ({ ...prev, [errorKey]: `Error loading ${errorKey}` }));
+      }
+    };
 
-      setPendingVerifications(verifications.data);
-      setPendingDeletions(deletions.data);
-      setPendingStories(stories.data);
-      setPendingMeetings(meetings.data);
-      setPendingQuestions(questions.data);
+    try {
+      await Promise.all([
+        fetchData('/api/admin/verifications/pending', setPendingVerifications, 'verifications', 'users'),
+        fetchData('/api/admin/deletions/pending', setPendingDeletions, 'deletions', 'users'),
+        fetchData('/api/admin/stories/pending', setPendingStories, 'stories', 'stories'),
+        fetchData('/api/admin/meetings/pending', setPendingMeetings, 'meetings', 'meetings'),
+        fetchData('/api/admin/questions/pending', setPendingQuestions, 'questions', 'questions'),
+      ]);
     } catch (error) {
-      console.error('Error fetching admin data:', error);
+      setErrors(prev => ({ ...prev, general: 'Error loading dashboard data' }));
+    } finally {
+      setLoadingData(false);
     }
   };
 
   if (loading) {
-    return <div>Loading admin dashboard...</div>;
+    return <div className="loading-container">Loading admin dashboard...</div>;
   }
 
   if (!user || user.role !== 'admin') {
-    return <div>Access Denied. You are not an admin.</div>;
+    return <div className="error-container">Access Denied. You are not an admin.</div>;
   }
-
-
 
   return (
     <div className="admin-dashboard">
       <h1>Admin Dashboard</h1>
-      <div className="admin-stats">
-        <div className="stats-card">
-          <h3>Pending Verifications</h3>
-          <span>{pendingVerifications.length}</span>
-        </div>
-        <div className="stats-card">
-          <h3>Pending Deletions</h3>
-          <span>{pendingDeletions.length}</span>
-        </div>
-        <div className="stats-card">
-          <h3>Pending Stories</h3>
-          <span>{pendingStories.length}</span>
-        </div>
-        <div className="stats-card">
-          <h3>Pending Meetings</h3>
-          <span>{pendingMeetings.length}</span>
-        </div>
-        <div className="stats-card">
-          <h3>Pending Questions</h3>
-          <span>{pendingQuestions.length}</span>
-        </div>
-      </div>
 
-      <div className="admin-actions">
-        <button onClick={() => navigate('/admin/verifications')}>Verification Requests</button>
-        <button onClick={() => navigate('/admin/premium-members')}>Premium Members</button>
-        <button onClick={() => navigate('/admin/stories')}>Story Approvals</button>
-        <button onClick={() => navigate('/admin/meetings')}>Meeting Requests</button>
-        <button onClick={() => navigate('/admin/questions')}>FAQ Management</button>
-        <button onClick={() => navigate('/admin/property-management')}>Property Management</button>
-      </div>
+      {loadingData ? (
+        <div className="loading-container">
+          <div className="loader"></div>
+          Loading dashboard data...
+        </div>
+      ) : errors.general ? (
+        <div className="error-message">{errors.general}</div>
+      ) : (
+        <>
+          <div className="admin-stats">
+            <div className="stats-card">
+              <h3>Pending Verifications</h3>
+              <span>{pendingVerifications.length}</span>
+              {errors.verifications && <div className="error-text">{errors.verifications}</div>}
+              <button
+                className="action-button"
+                onClick={() => navigate('/admin/verifications')}
+                disabled={!!errors.verifications}
+              >
+                View Details
+              </button>
+            </div>
+            <div className="stats-card">
+              <h3>Pending Deletions</h3>
+              <span>{pendingDeletions.length}</span>
+              {errors.deletions && <div className="error-text">{errors.deletions}</div>}
+              <button
+                className="action-button"
+                onClick={() => navigate('/admin/property-management')}
+                disabled={!!errors.deletions}
+              >
+                Properties
+              </button>
+            </div>
+            <div className="stats-card">
+              <h3>Pending Stories</h3>
+              <span>{pendingStories.length}</span>
+              {errors.stories && <div className="error-text">{errors.stories}</div>}
+              <button
+                className="action-button"
+                onClick={() => navigate('/admin/stories')}
+                disabled={!!errors.stories}
+              >
+                Review Stories
+              </button>
+            </div>
+            <div className="stats-card">
+              <h3>Pending Meetings</h3>
+              <span>{pendingMeetings.length}</span>
+              {errors.meetings && <div className="error-text">{errors.meetings}</div>}
+              <button
+                className="action-button"
+                onClick={() => navigate('/admin/meetings')}
+                disabled={!!errors.meetings}
+              >
+                View Meetings
+              </button>
+            </div>
+            <div className="stats-card">
+              <h3>Pending Questions</h3>
+              <span>{pendingQuestions.length}</span>
+              {errors.questions && <div className="error-text">{errors.questions}</div>}
+              <button
+                className="action-button"
+                onClick={() => navigate('/admin/questions')}
+                disabled={!!errors.questions}
+              >
+                Manage FAQ
+              </button>
+            </div>
+          </div>
+        </>
+      )}
 
-      <button className="logout-button" onClick={logout}>Logout</button>
+      
+
+      
     </div>
   );
 };

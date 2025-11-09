@@ -14,7 +14,7 @@ const Notifications = () => {
   const fetchNotifications = async () => {
     try {
       const headers = { Authorization: `Bearer ${token}` };
-      const response = await axios.get('http://localhost:5000/api/notifications', { headers });
+      const response = await axios.get('http://localhost:5001/api/notifications', { headers });
       setNotifications(response.data.notifications);
     } catch (error) {
       console.error('Error fetching notifications:', error);
@@ -24,7 +24,7 @@ const Notifications = () => {
   const handleMarkAsRead = async (notifId) => {
     try {
       const headers = { Authorization: `Bearer ${token}` };
-      await axios.put(`http://localhost:5000/api/notifications/${notifId}/read`, {}, { headers });
+      await axios.put(`http://localhost:5001/api/notifications/${notifId}/read`, {}, { headers });
       fetchNotifications();
     } catch (error) {
       console.error('Error marking as read:', error);
@@ -34,7 +34,7 @@ const Notifications = () => {
   const handleDelete = async (notifId) => {
     try {
       const headers = { Authorization: `Bearer ${token}` };
-      await axios.delete(`http://localhost:5000/api/notifications/${notifId}`, { headers });
+      await axios.delete(`http://localhost:5001/api/notifications/${notifId}`, { headers });
       fetchNotifications();
     } catch (error) {
       console.error('Error deleting notification:', error);

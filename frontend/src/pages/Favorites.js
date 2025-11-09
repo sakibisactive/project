@@ -14,7 +14,7 @@ const Favorites = () => {
   const fetchFavorites = async () => {
     try {
       const headers = { Authorization: `Bearer ${token}` };
-      const response = await axios.get('http://localhost:5000/api/favorites', { headers });
+      const response = await axios.get('http://localhost:5001/api/favorites', { headers });
       setFavorites(response.data.favorites);
     } catch (error) {
       console.error('Error fetching favorites:', error);

@@ -1,6 +1,5 @@
 import React, { createContext, useState, useEffect } from 'react';
-import axios from 'axios';
-import { API_URL } from '../config';
+import axios from '../utils/axios';
 
 export const AuthContext = createContext();
 
@@ -20,9 +19,7 @@ export const AuthProvider = ({ children }) => {
 
   const loadUser = async () => {
     try {
-      const res = await axios.get(`${API_URL}/api/auth/me`, {
-        headers: { Authorization: `Bearer ${token}` }
-      });
+      const res = await axios.get('/api/auth/me');
       setUser(res.data.user);
     } catch (error) {
       console.error('Error loading user:', error);

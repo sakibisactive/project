@@ -32,7 +32,7 @@ const RentalProperties = () => {
   const fetchRentals = async () => {
     try {
       const headers = { Authorization: `Bearer ${token}` };
-      const response = await axios.get('http://localhost:5000/api/rentals', { headers });
+      const response = await axios.get('http://localhost:5001/api/rentals', { headers });
       setRentals(response.data.rentals);
     } catch (error) {
       console.error('Error fetching rentals:', error);
@@ -47,7 +47,7 @@ const handleChange = (e) => {
     e.preventDefault();
     try {
       const headers = { Authorization: `Bearer ${token}` };
-      await axios.post('http://localhost:5000/api/rentals', formData, { headers });
+      await axios.post('http://localhost:5001/api/rentals', formData, { headers });
       alert('Rental property advertised successfully!');
       setFormData({
         propertyType: '',

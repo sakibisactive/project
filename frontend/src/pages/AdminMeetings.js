@@ -14,7 +14,7 @@ const AdminMeetings = () => {
   const fetchMeetings = async () => {
     try {
       const response = await axios.get('/api/admin/pending-meetings');
-      setMeetings(response.data);
+      setMeetings(response.data.meetings);
       setLoading(false);
     } catch (error) {
       setError('Error fetching meetings');

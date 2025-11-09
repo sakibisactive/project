@@ -67,7 +67,7 @@ const Profile = () => {
       const headers = { Authorization: `Bearer ${token}` };
       
       const response = await axios.put(
-        `http://localhost:5000/api/users/${user._id}`,
+        `http://localhost:5001/api/users/${user._id}`,
         formData,
         { headers }
       );

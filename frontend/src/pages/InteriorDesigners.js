@@ -22,7 +22,7 @@ const InteriorDesigners = () => {
   setError(null);
 
   try {
-    const response = await fetch('http://localhost:5000/api/contacts/interior', {
+    const response = await fetch('http://localhost:5001/api/contacts/interior', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',

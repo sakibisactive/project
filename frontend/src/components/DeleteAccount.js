@@ -13,7 +13,7 @@ const DeleteAccount = () => {
   const handleDelete = async () => {
     setError('');
     try {
-      await axios.delete(`http://localhost:5000/api/users/${user._id}`, {
+      await axios.delete(`http://localhost:5001/api/users/${user._id}`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       logout();

@@ -14,10 +14,11 @@ const AdminPremiumMembers = () => {
   const fetchPremiumMembers = async () => {
     try {
       const response = await axios.get('/api/admin/premium-members');
-      setPremiumMembers(response.data);
+      setPremiumMembers(response.data.premiumMembers || []);
       setLoading(false);
     } catch (error) {
-      setError('Error fetching premium members');
+      console.error('Error details:', error);
+      setError(error.response?.data?.error || 'Error fetching premium members');
       setLoading(false);
     }
   };
@@ -28,17 +29,28 @@ const AdminPremiumMembers = () => {
   return (
     <div className="admin-premium-members">
       <h2>Premium Members</h2>
-      <div className="premium-members-list">
-        {premiumMembers.length === 0 ? (
+      {premiumMembers.length === 0 ? (
+        <div>
           <p>No premium members found</p>
-        ) : (
-          premiumMembers.map(member => (
+          {error && (
+            <div className="error-details" style={{margin: '20px 0', padding: '10px', backgroundColor: '#ffebee'}}>
+              <p>Error: {error}</p>
+            </div>
+          )}
+        </div>
+      ) : (
+        <div className="premium-members-list">
+          <div className="member-count" style={{margin: '10px 0', padding: '10px', backgroundColor: '#e8f5e9'}}>
+            <p>Total Premium Members: {premiumMembers.length}</p>
+          </div>
+          {premiumMembers.map(member => (
             <div key={member._id} className="member-card">
               <div className="member-info">
                 <h3>{member.name}</h3>
                 <p>Email: {member.email}</p>
-                <p>Member since: {new Date(member.premiumSince).toLocaleDateString()}</p>
+                <p>Member since: {new Date(member.createdAt).toLocaleDateString()}</p>
                 <p>Status: <span className="verified-badge">{member.verified ? 'Verified' : 'Pending'}</span></p>
+                <p>Role: {member.role}</p>
               </div>
               <div className="member-stats">
                 <div className="stat">
@@ -55,9 +67,9 @@ const AdminPremiumMembers = () => {
                 </div>
               </div>
             </div>
-          ))
-        )}
-      </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 };

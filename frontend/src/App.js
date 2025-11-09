@@ -25,6 +25,7 @@ import AdminPremiumMembers from './pages/AdminPremiumMembers';
 import AdminStories from './pages/AdminStories';
 import AdminMeetings from './pages/AdminMeetings';
 import AdminQuestions from './pages/AdminQuestions';
+import AdminPropertyManagement from './pages/AdminPropertyManagement';
 import PaymentPage from './components/Payment';
 import PropertyDetails from './pages/PropertyDetails';
 import Advertise from './pages/Advertise';
@@ -95,6 +96,11 @@ function AppRoutes({ darkMode }) {
       <Route path="/admin/premium-members" element={
         <PrivateRoute role="admin">
           <AdminPremiumMembers />
+        </PrivateRoute>
+      } />
+      <Route path="/admin/property-management" element={
+        <PrivateRoute role="admin">
+          <AdminPropertyManagement />
         </PrivateRoute>
       } />
       <Route path="/admin/stories" element={

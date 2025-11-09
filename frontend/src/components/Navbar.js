@@ -58,13 +58,6 @@ const Navbar = ({ darkMode, toggleDarkMode }) => {
             <span className="notification-badge"></span>
           </Link>
 
-          {/* Upgrade to Premium for non-premium users */}
-          {user.role !== 'premium' && (
-            <Link to="/upgrade" className="upgrade-pill" title="Upgrade to Premium">
-              UPGRADE
-            </Link>
-          )}
-
           {/* Dark Mode Toggle */}
           <button className="icon-btn dark-mode-btn" onClick={toggleDarkMode} title={t('darkMode')}>
             {darkMode ? <FaSun size={18} /> : <FaMoon size={18} />}
@@ -85,14 +78,20 @@ const Navbar = ({ darkMode, toggleDarkMode }) => {
                   <FiUser size={16} />
                   <span>{t('profile')}</span>
                 </Link>
-                <Link to="/story" className="dropdown-item" onClick={() => setIsProfileMenuOpen(false)}>
+                <Link 
+                  to="/stories"
+                  className="dropdown-item" 
+                  onClick={() => setIsProfileMenuOpen(false)}
+                >
                   <FiPenTool size={16} />
                   <span>{t('stories')}</span>
                 </Link>
-                <Link to="/wishlist" className="dropdown-item" onClick={() => setIsProfileMenuOpen(false)}>
-                  <FiHeart size={16} />
-                  <span>{t('wishlist')}</span>
-                </Link>
+                {user.role !== 'admin' && (
+                  <Link to="/wishlist" className="dropdown-item" onClick={() => setIsProfileMenuOpen(false)}>
+                    <FiHeart size={16} />
+                    <span>{t('wishlist')}</span>
+                  </Link>
+                )}
                 {user.role === 'premium' && (
                   <>
                     <Link to="/payment" className="dropdown-item" onClick={() => setIsProfileMenuOpen(false)}>

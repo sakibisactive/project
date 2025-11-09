@@ -15,7 +15,7 @@ const AdminQuestions = () => {
   const fetchQuestions = async () => {
     try {
       const response = await axios.get('/api/admin/pending-questions');
-      setQuestions(response.data);
+      setQuestions(response.data.questions);
       setLoading(false);
     } catch (error) {
       setError('Error fetching questions');

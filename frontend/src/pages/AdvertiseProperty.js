@@ -25,7 +25,7 @@ const AdvertiseProperty = () => {
     e.preventDefault();
     try {
       const headers = { Authorization: `Bearer ${token}` };
-      await axios.post('http://localhost:5000/api/properties', formData, { headers });
+      await axios.post('http://localhost:5001/api/properties', formData, { headers });
       alert('Property advertised successfully!');
       setFormData({
         propertyType: '',

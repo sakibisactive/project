@@ -41,7 +41,7 @@ const FAQ = () => {
     setError('');
     try {
       const headers = { Authorization: `Bearer ${token}` };
-      const response = await axios.get('http://localhost:5000/api/faq/all', { headers });
+      const response = await axios.get('http://localhost:5001/api/faq/all', { headers });
       setFaqs(response.data.faqs || []);
     } catch (err) {
       setError('Failed to load FAQs');
@@ -144,7 +144,7 @@ const FAQ = () => {
     try {
       const headers = { Authorization: `Bearer ${token}` };
       await axios.post(
-        'http://localhost:5000/api/faq/submit',
+        'http://localhost:5001/api/faq/submit',
         {
           userId: user._id,
           userName: user.name,
@@ -169,7 +169,7 @@ const FAQ = () => {
     try {
       const headers = { Authorization: `Bearer ${token}` };
       await axios.post(
-        `http://localhost:5000/api/faq/${faqId}/helpful`,
+        `http://localhost:5001/api/faq/${faqId}/helpful`,
         {},
         { headers }
       );

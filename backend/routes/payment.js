@@ -100,7 +100,7 @@ router.post('/confirm', auth, async (req, res) => {
 
     // Send confirmation notification to admin
     try {
-      await axios.post('http://localhost:5000/api/admin/notification', {
+      await axios.post('http://localhost:5001/api/admin/notification', {
         type: 'payment_confirmed',
         userId: userId,
         userName: user.name,

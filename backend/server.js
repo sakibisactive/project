@@ -11,15 +11,28 @@ const app = express();
 // ==================== MIDDLEWARE ====================
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
+
+// CORS configuration
 app.use(cors({
-  origin: true,
+  origin: 'http://localhost:3000',
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization']
+  allowedHeaders: ['Content-Type', 'Authorization', 'Origin', 'Accept', 'X-Requested-With'],
+  exposedHeaders: ['Set-Cookie']
 }));
-app.use(cookieParser());
+
+// Request logging middleware
 app.use((req, res, next) => {
-  console.log("Received:", req.method, req.url);
+  console.log(`${req.method} ${req.url}`, {
+    headers: req.headers,
+    body: req.body,
+    query: req.query
+  });
+
+  if (req.method === 'OPTIONS') {
+    return res.status(200).end();
+  }
   next();
 });
 
@@ -62,8 +75,7 @@ app.use('/api/technician', technicianRoutes);
 
 // FAQ Routes
 const faqRoutes = require('./routes/faq');
-app.use('/api/faq', require('./routes/faq'));
-
+app.use('/api/faq', faqRoutes);
 
 // Meeting Routes
 const meetingRoutes = require('./routes/meeting');
@@ -71,7 +83,7 @@ app.use('/api/meeting', meetingRoutes);
 
 // Story Routes
 const storyRoutes = require('./routes/story');
-app.use('/api/story', require('./routes/story'));
+app.use('/api/story', storyRoutes);
 
 
 // Payment Routes
@@ -122,7 +134,7 @@ app.use((err, req, res, next) => {
 });
 
 // ==================== START SERVER ====================
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5001;
 app.listen(PORT, () => {
   console.log(`✅ Server running on http://localhost:${PORT}`);
 });

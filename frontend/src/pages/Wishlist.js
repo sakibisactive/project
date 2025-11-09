@@ -18,7 +18,7 @@ const Wishlist = ({ darkMode }) => {
   const fetchWishlist = async () => {
     try {
       setLoading(true);
-      const response = await axios.get('http://localhost:5000/api/wishlist', {
+      const response = await axios.get('http://localhost:5001/api/wishlist', {
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -35,7 +35,7 @@ const Wishlist = ({ darkMode }) => {
   const removeFromWishlist = async (propertyId) => {
     try {
       await axios.post(
-        'http://localhost:5000/api/wishlist/remove',
+        'http://localhost:5001/api/wishlist/remove',
         { propertyId },
         {
           headers: {

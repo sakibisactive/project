@@ -45,10 +45,44 @@ router.post('/questions/:id/handle', auth, roleCheck('admin'), handleQuestion);
 router.get('/premium-members', auth, roleCheck('admin'), getPremiumMembers);
 
 // Property management
-router.delete('/properties/:id', auth, roleCheck('admin'), deleteProperty);
+router.delete('/properties/:id', auth, roleCheck('admin'), async (req, res) => {
+  try {
+    const property = await Property.findByIdAndDelete(req.params.id);
+    
+    if (!property) {
+      return res.status(404).json({ error: 'Property not found' });
+    }
+
+    // Log the deletion
+    await AdminLog.create({
+      admin: req.user._id,
+      action: 'delete_property',
+      details: `Deleted property: ${property.title}`,
+      property: property._id
+    });
+
+    // Notify the property owner
+    if (property.owner) {
+      await Notification.create({
+        recipient: property.owner,
+        type: 'property_deleted',
+        message: `Your property "${property.title}" has been deleted by an admin.`,
+        property: property._id
+      });
+    }
+
+    res.json({ success: true, message: 'Property deleted successfully' });
+  } catch (error) {
+    console.error('Error deleting property:', error);
+    res.status(500).json({ error: 'Error deleting property' });
+  }
+});
 
 // Statistics and Logs
 router.get('/stats', auth, roleCheck('admin'), getAdminStats);
 router.get('/logs', auth, roleCheck('admin'), getAdminLogs);
+
+router.get('/pending-meetings', auth, roleCheck('admin'), getPendingMeetings);
+router.get('/pending-questions', auth, roleCheck('admin'), getPendingQuestions);
 
 module.exports = router;

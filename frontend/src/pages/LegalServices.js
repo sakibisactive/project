@@ -23,7 +23,7 @@ const LegalServices = () => {
 
     try {
       // API call: GET /api/company/legal
-      const response = await fetch('http://localhost:5000/api/contacts/legal', {
+      const response = await fetch('http://localhost:5001/api/contacts/legal', {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',

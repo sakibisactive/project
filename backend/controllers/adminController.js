@@ -13,8 +13,10 @@ exports.getPendingVerifications = async (req, res) => {
       verified: false 
     }).select('-password');
 
+    console.log('Pending verifications found:', users.length);
     res.json({ success: true, users });
   } catch (error) {
+    console.error('Error in getPendingVerifications:', error);
     res.status(500).json({ error: error.message });
   }
 };
@@ -25,8 +27,10 @@ exports.getPendingDeletions = async (req, res) => {
       deletionRequested: true 
     }).select('-password');
 
+    console.log('Pending deletions found:', users.length);
     res.json({ success: true, users });
   } catch (error) {
+    console.error('Error in getPendingDeletions:', error);
     res.status(500).json({ error: error.message });
   }
 };
@@ -127,11 +131,38 @@ exports.getPendingStories = async (req, res) => {
 
 exports.getPremiumMembers = async (req, res) => {
   try {
-    const premiumMembers = await User.find({ role: 'premium', verified: true }).select('-password');
+    // First, let's check if we have any users with premium role
+    const allPremiumUsers = await User.find({ role: 'premium' }).select('-password');
+    console.log('All premium users found:', allPremiumUsers.length);
 
+    // Get all verified premium users
+    const verifiedPremiumMembers = await User.find({ 
+      role: 'premium',
+      verified: true 
+    }).select('-password');
+    
+    console.log('Verified premium members found:', verifiedPremiumMembers.length);
 
-    res.json({ success: true, premiumMembers });
+    // For debugging, let's also check unverified premium users
+    const unverifiedPremiumMembers = await User.find({ 
+      role: 'premium',
+      verified: false 
+    }).select('-password');
+    
+    console.log('Unverified premium members found:', unverifiedPremiumMembers.length);
+
+    // Send all data for now (we can adjust this later)
+    res.json({ 
+      success: true, 
+      premiumMembers: allPremiumUsers,
+      debug: {
+        totalPremium: allPremiumUsers.length,
+        verifiedCount: verifiedPremiumMembers.length,
+        unverifiedCount: unverifiedPremiumMembers.length
+      }
+    });
   } catch (error) {
+    console.error('Error in getPremiumMembers:', error);
     res.status(500).json({ error: error.message });
   }
 };

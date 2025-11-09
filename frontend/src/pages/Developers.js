@@ -23,7 +23,7 @@ const Developers = () => {
 
     try {
       // API call: GET /api/company/developers
-      const response = await fetch('http://localhost:5000/api/contacts/developers', {
+      const response = await fetch('http://localhost:5001/api/contacts/developers', {
   method: 'GET',
   headers: {
     'Content-Type': 'application/json',

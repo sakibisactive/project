@@ -23,7 +23,7 @@ const MovingServices = () => {
 
     try {
       // API call: GET /api/company/moving
-      const response = await fetch('http://localhost:5000/api/contacts/moving', {
+      const response = await fetch('http://localhost:5001/api/contacts/moving', {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',

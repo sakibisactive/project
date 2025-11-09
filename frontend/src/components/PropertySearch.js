@@ -40,7 +40,7 @@ const PropertySearch = () => {
         ...(filters.dateSort && { dateSort: filters.dateSort })
       });
 
-      const response = await axios.get(`http://localhost:5000/api/properties?${query}`, { headers });
+      const response = await axios.get(`http://localhost:5001/api/properties?${query}`, { headers });
       setProperties(response.data.properties || []);
       setSearched(true);
     } catch (error) {

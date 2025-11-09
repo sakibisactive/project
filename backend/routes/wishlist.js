@@ -99,7 +99,7 @@ router.post('/check-price-drops', async (req, res) => {
           const savingsPercent = Math.round((savings / originalPrice) * 100);
 
           try {
-            await axios.post('http://localhost:5000/api/admin/notification', {
+            await axios.post('http://localhost:5001/api/admin/notification', {
               type: 'price_drop',
               userId: wishlist.userId,
               propertyId: property._id,

@@ -59,7 +59,7 @@ Status: Pending Admin Approval
 Time: ${new Date().toLocaleString()}
       `.trim();
 
-      await axios.post('http://localhost:5000/api/admin/notification', {
+      await axios.post('http://localhost:5001/api/admin/notification', {
         type: 'meeting_request',
         meetingId: meeting._id,
         userId: userId,

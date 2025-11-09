@@ -13,8 +13,9 @@ const AdminVerifications = () => {
 
   const fetchPendingVerifications = async () => {
     try {
-      const response = await axios.get('/api/admin/pending-verifications');
-      setPendingVerifications(response.data);
+      const response = await axios.get('/api/admin/verifications/pending');
+      setPendingVerifications(response.data.users);
+
       setLoading(false);
     } catch (error) {
       setError('Error fetching verification requests');

@@ -1,104 +1,107 @@
 .admin-dashboard {
-    max-width: 1200px;
-    margin: 30px auto;
-    padding: 20px;
-  }
-  
-  .admin-tabs {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 30px;
-    flex-wrap: wrap;
-  }
-  
-  .admin-tabs button {
-    padding: 10px 20px;
-    background: #f0f0f0;
-    border: 2px solid #ddd;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: 0.3s;
-    font-weight: 600;
-  }
-  
-  .admin-tabs button.active {
-    background: #667eea;
-    color: white;
-    border-color: #667eea;
-  }
-  
-  .admin-tabs button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-  }
-  
-  .stats-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 20px;
-    margin-bottom: 30px;
-  }
-  
-  .stat-card {
-    background: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    text-align: center;
-  }
-  
-  .stat-number {
-    font-size: 32px;
-    font-weight: bold;
-    color: #667eea;
-    margin-top: 10px;
-  }
-  
-  .verification-card, .story-card, .member-card, .log-card {
-    background: white;
-    padding: 20px;
-    border-radius: 10px;
-    margin-bottom: 15px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  .verification-card .user-info h4,
-  .story-card h4,
-  .member-card h4 {
-    margin-bottom: 10px;
-    color: #333;
-  }
-  
-  .actions {
-    display: flex;
-    gap: 10px;
-    margin-top: 15px;
-  }
-  
-  .btn-approve {
-    background: #4CAF50;
-    color: white;
-    padding: 8px 15px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .btn-approve:hover {
-    background: #45a049;
-  }
-  
-  .btn-reject {
-    background: #f44336;
-    color: white;
-    padding: 8px 15px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .btn-reject:hover {
-    background: #da190b;
-  }
-  
- 
+  background: #fff;
+  border-radius: 20px;
+  padding: 40px 30px 30px 30px;
+  max-width: 1100px;
+  margin: 30px auto 0;
+  box-shadow: 0 4px 24px 0 rgba(80,80,120,0.10);
+}
+
+.admin-dashboard h1 {
+  text-align: center;
+  font-size: 2.8rem;
+  color: #223354;
+  margin-bottom: 30px;
+  letter-spacing: 1.5px;
+}
+
+.admin-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 28px;
+  justify-content: space-around;
+  margin-bottom: 32px;
+}
+
+.stats-card {
+  background: #f8f9ff;
+  border-radius: 16px;
+  box-shadow: 0 2px 10px rgba(116,127,202,0.10);
+  padding: 28px 26px;
+  flex: 1 1 200px;
+  text-align: center;
+  min-width: 210px;
+  max-width: 240px;
+  margin: 10px 0;
+}
+
+.stats-card h3 {
+  margin-bottom: 8px;
+  font-size: 1.15rem;
+  color: #354280;
+  font-weight: 700;
+}
+
+.stats-card span {
+  display: block;
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: #4f5aee;
+  margin-bottom: 18px;
+  margin-top: 6px;
+  letter-spacing: 1px;
+}
+
+.action-button {
+  padding: 0.65rem 1.7rem;
+  background: linear-gradient(90deg,#7b3ff3 15%, #3ed5fa 115%);
+  color: #fff;
+  border: none;
+  border-radius: 30px;
+  font-size: 1rem;
+  font-weight: 600;
+  box-shadow: 0 4px 16px rgba(56,101,254,0.15);
+  cursor: pointer;
+  margin-top: 8px;
+  transition: transform 0.15s, background 0.2s;
+}
+
+.action-button:hover, .action-button:focus {
+  background: linear-gradient(90deg,#6b2ef2 10%, #47dedc 115%);
+  transform: translateY(-4px) scale(1.04);
+  outline: none;
+}
+
+.error-text {
+  color: #e34850;
+  font-size: 0.92rem;
+  margin-top: 7px;
+}
+
+.loading-container, .error-container {
+  margin: 48px auto;
+  text-align: center;
+  font-size: 1.2rem;
+  color: #354280;
+}
+
+.logout-button {
+  display: block;
+  margin: 40px auto 0;
+  padding: 0.55rem 1.7rem;
+  background: linear-gradient(90deg,#e05050 15%, #ffaaaa 115%);
+  color: #fff;
+  border: none;
+  border-radius: 28px;
+  font-size: 1rem;
+  font-weight: 500;
+  box-shadow: 0 4px 16px rgba(230,80,80,0.14);
+  cursor: pointer;
+  transition: transform 0.13s, background 0.2s;
+}
+
+.logout-button:hover, .logout-button:focus {
+  background: linear-gradient(90deg,#ad2323 15%, #ff8888 115%);
+  transform: translateY(-2px) scale(1.03);
+  outline: none;
+}

@@ -34,7 +34,7 @@ const Payment = ({ darkMode }) => {
   const checkReferralStatus = async () => {
     try {
       const headers = { Authorization: `Bearer ${token}` };
-      const response = await axios.get('http://localhost:5000/api/referral/check', { headers });
+      const response = await axios.get('http://localhost:5001/api/referral/check', { headers });
       if (response.data.hasReferral) {
         setHasReferral(true);
         setReferralCode(response.data.referralCode);
@@ -48,7 +48,7 @@ const Payment = ({ darkMode }) => {
   const checkIfReferrer = async () => {
     try {
       const headers = { Authorization: `Bearer ${token}` };
-      const response = await axios.get('http://localhost:5000/api/referral/referrer-stats', { headers });
+      const response = await axios.get('http://localhost:5001/api/referral/referrer-stats', { headers });
       if (response.data.isReferrer) {
         setIsReferrer(true);
         setReferredUsers(response.data.referredUsers || []);
@@ -68,7 +68,7 @@ const Payment = ({ darkMode }) => {
     try {
       const headers = { Authorization: `Bearer ${token}` };
       const response = await axios.post(
-        'http://localhost:5000/api/referral/apply',
+        'http://localhost:5001/api/referral/apply',
         { referralCode: referralCode.trim() },
         { headers }
       );
@@ -94,7 +94,7 @@ const Payment = ({ darkMode }) => {
       const headers = { Authorization: `Bearer ${token}` };
       const finalPrice = calculateFinalPrice();
       const response = await axios.post(
-        'http://localhost:5000/api/payment/initiate',
+        'http://localhost:5001/api/payment/initiate',
         {
           amount: finalPrice,
           method: paymentMethod,
@@ -119,7 +119,7 @@ const Payment = ({ darkMode }) => {
     try {
       const headers = { Authorization: `Bearer ${token}` };
       await axios.post(
-        'http://localhost:5000/api/payment/confirm',
+        'http://localhost:5001/api/payment/confirm',
         {
           transactionId: paymentInfo?.transactionId || `TXN_${Date.now()}`,
           amount: paymentInfo?.amount,
